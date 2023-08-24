@@ -1,5 +1,5 @@
-import React from "react";
 import { signUpSchema } from "../schema";
+import { useToastMessages } from "@/components/message/useToastMessages";
 
 interface Props {
   name: string;
@@ -7,6 +7,7 @@ interface Props {
   password: string;
 }
 const useSignUp = () => {
+  const { Success, Warn } = useToastMessages();
   const initialValues: Props = {
     name: "",
     email: "",
@@ -14,18 +15,16 @@ const useSignUp = () => {
   };
 
   const handleSubmit = async (values: Props, { resetForm }: any) => {
-    console.log("I am signUpSchema", values);
-
     await fetch("/api/users", {
       method: "POST",
       body: JSON.stringify(values),
     }).then(async (res) => {
       if (res.ok) {
         const result = await res.json();
-        console.log("I am data:=", result);
+        const { error, message } = result as { message: string; error: string };
+        Success(message);
       }
     });
-
     resetForm();
   };
 

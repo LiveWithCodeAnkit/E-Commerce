@@ -1,5 +1,6 @@
-import { genSalt, hash } from "bcrypt";
 import { Document, Schema, models, model, Model } from "mongoose";
+import { compare, genSalt, hash } from "bcrypt";
+import bcrypt from "bcrypt";
 
 interface UserDocument extends Document {
   email: string;
@@ -10,7 +11,11 @@ interface UserDocument extends Document {
   verified: boolean;
 }
 
-const userSchema = new Schema<UserDocument>(
+interface Method {
+  comparePassword(password: string): Promise<boolean>;
+}
+
+const userSchema = new Schema<UserDocument, {}, Method>(
   {
     email: { type: String, required: true, unique: true },
     name: { type: String, required: true, trim: true },
@@ -23,22 +28,43 @@ const userSchema = new Schema<UserDocument>(
   { timestamps: true }
 );
 
+// userSchema.pre("save", async function (next) {
+//   try {
+//     if (!this.isModified(this.password)) {
+//       console.log("i am bcrypt");
+//       return next();
+//     }
+//     const salt = await bcrypt.genSalt(10);
+//     this.password = await bcrypt.hash(this.password, salt);
+//     next();
+//   } catch (error) {
+//     throw error;
+//   }
+// });
+
 userSchema.pre("save", async function (next) {
- 
-    
   try {
-    if (this.isModified(this.password)) {
-        console.log("i am bcrypt");
+    if (!this.isModified("password")) {
       return next();
     }
-    const salt = await genSalt(10);
-    this.password = await hash(this.password, salt);
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (error) {
     throw error;
   }
 });
 
+userSchema.methods.comparePassword = async function (
+  password: string
+): Promise<boolean> {
+  try {
+    return await compare(password, this.password);
+  } catch (error) {
+    throw error;
+  }
+};
+
 const UserModel = models.User || model("User", userSchema);
 
-export default UserModel as Model<UserDocument>;
+export default UserModel as Model<UserDocument, {}, Method>;

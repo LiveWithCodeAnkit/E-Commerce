@@ -1,4 +1,7 @@
+import { signIn } from "next-auth/react";
 import { signInSchema } from "../schema";
+import { useToastMessages } from "@/components/message/useToastMessages";
+import { useRouter } from "next/navigation";
 
 interface Props {
   email: string;
@@ -6,13 +9,30 @@ interface Props {
 }
 
 export const useSignIn = () => {
+  const router = useRouter();
+  const { Success, Warn } = useToastMessages();
   const initialValues: Props = {
     email: "",
     password: "",
   };
 
-  const handleSubmit = (values: Props, { resetForm }: any) => {
+  const handleSubmit = async (values: Props, { resetForm }: any) => {
     console.log("I am login", values);
+    const { email, password } = values;
+
+    const signRes = await signIn("credentials", {
+      ...values,
+      redirect: false,
+    });
+    console.log("i am login:=", signRes?.error);
+
+    if (signRes?.error === "CallbackRouteError") {
+      Warn("Something Wrong");
+    }
+    if (!signRes?.error) {
+      Success("Welcome ");
+      router.refresh();
+    }
 
     resetForm();
   };

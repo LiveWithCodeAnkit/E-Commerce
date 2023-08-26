@@ -7,6 +7,7 @@ const signInSchema = Yup.object().shape({
     .matches(emailRules, { message: " Not valid :{" })
     .required("Email Required !"),
   password: Yup.string()
+
     .matches(passwordRules, { message: "Please create a stronger password !" })
     .required("Password Required !"),
 });

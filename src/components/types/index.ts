@@ -14,3 +14,8 @@ export interface EmailVerifyRequest {
   token: string;
   userId: string;
 }
+
+export interface SignInCredentials {
+  email: string;
+  password: string;
+}

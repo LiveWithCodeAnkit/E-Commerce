@@ -7,7 +7,7 @@ interface UserDocument extends Document {
   name: string;
   password: string;
   role: "admin " | "user";
-  avatar: { url: string; id: string };
+  avatar?: { url: string; id: string };
   verified: boolean;
 }
 

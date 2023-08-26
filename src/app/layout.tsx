@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/navbar";
+import AuthSession from "@/components/auth-session/AuthSession";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,13 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ToastContainer />
-        <Navbar />
+    <AuthSession>
+      <html lang="en">
+        <body className={inter.className}>
+          <ToastContainer />
+          <Navbar />
 
-        {children}
-      </body>
-    </html>
+          {children}
+        </body>
+      </html>
+    </AuthSession>
   );
 }

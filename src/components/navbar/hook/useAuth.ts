@@ -1,5 +1,4 @@
 import { useSession } from "next-auth/react";
-import React from "react";
 
 interface Auth {
   loading: boolean;
@@ -8,6 +7,8 @@ interface Auth {
 }
 const useAuth = (): Auth => {
   const session = useSession();
+  // console.log("i am useAuth page:=", session);
+
   return {
     loading: session.status === "loading",
     loggedIn: session.status === "authenticated",

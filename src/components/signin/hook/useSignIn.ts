@@ -1,7 +1,7 @@
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { signInSchema } from "../schema";
 import { useToastMessages } from "@/components/message/useToastMessages";
-import { useRouter } from "next/navigation";
 
 interface Props {
   email: string;
@@ -28,6 +28,7 @@ export const useSignIn = () => {
 
     if (signRes?.error === "CallbackRouteError") {
       Warn("Something Wrong");
+      router.refresh();
     }
     if (!signRes?.error) {
       Success("Welcome ");

@@ -19,3 +19,13 @@ export interface SignInCredentials {
   email: string;
   password: string;
 }
+
+export interface ForgetPasswordRequest {
+  email: string;
+}
+
+export interface UpdatePasswordRequest {
+  token: string;
+  userId: string;
+  password: string;
+}

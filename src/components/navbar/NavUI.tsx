@@ -6,11 +6,15 @@ import {
   IconButton,
   Spinner,
 } from "@material-tailwind/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  XMarkIcon,
+  UserCircleIcon,
+  ShoppingBagIcon,
+} from "@heroicons/react/24/outline";
 import ProfileMenu from "./ProfileMenu";
 import { MobileNav } from "./MobileNav";
 import CartIcon from "./CartIcon";
-import { UserCircleIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { useAuth } from "./hook";
 
 interface Props {

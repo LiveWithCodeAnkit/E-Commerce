@@ -1,5 +1,5 @@
-import VerifyPage from "@/components/verify-page/VerifyPage";
 import React from "react";
+import VerifyPage from "@/components/verify-page/VerifyPage";
 
 interface Props {
   searchParams: {

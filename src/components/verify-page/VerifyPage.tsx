@@ -36,6 +36,7 @@ const VerifyPage = ({ searchParams }: Props) => {
         Warn(error);
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

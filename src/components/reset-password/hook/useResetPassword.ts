@@ -1,4 +1,3 @@
-import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useToastMessages } from "@/components/message/useToastMessages";
 import { resetPasswordSchema } from "../schema";
@@ -17,29 +16,6 @@ const useResetPassword = () => {
   };
   const token = searchParams.get("token");
   const userId = searchParams.get("userId");
-
-  // const handleSubmit = async (values: Props, { resetForm }: any) => {
-  //   console.log("i am handle Submit", values);
-
-  //   const { password, passwordConfirmation } = values;
-
-  //   const res = await fetch("/api/users/update-password", {
-  //     method: "POST",
-  //     body: JSON.stringify({ password, token, userId }),
-  //   });
-
-  //   console.log("i am res:=",token,userId);
-
-  //   const { message, error } = await res.json();
-  //   if (res.ok) {
-  //     Success(message);
-  //     router.replace("/auth/signin")
-  //   }
-  //   if (!res.ok || error) {
-  //     Warn(error);
-  //   }
-  //   resetForm();
-  // };
 
   const handleSubmit = async (values: Props, { resetForm }: any) => {
     const { password, passwordConfirmation } = values;

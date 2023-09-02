@@ -1,12 +1,11 @@
 import crypto from "crypto";
-import nodemailer from "nodemailer";
-import { NextResponse } from "next/server";
 import UserModel from "@/app/model/userModel";
 import PasswordResetTokenModel from "@/app/model/passwordResetTokenModel";
+import { NextResponse } from "next/server";
 import { ForgetPasswordRequest } from "@/components/types";
 
-
 import startDb from "@/app/lib/db";
+import { sendEmail } from "@/app/lib/email";
 
 export const POST = async (req: Request) => {
   try {
@@ -32,22 +31,10 @@ export const POST = async (req: Request) => {
 
     const forgotUrl = `http://localhost:3000/auth/reset-password?token=${token}&userId=${user._id}`;
 
-    const transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
-      auth: {
-        user: "ef04625ff2cfdc",
-        pass: "89fc0c22f3b13c",
-      },
-    });
-
-    //   const verificationUrl = `http://localhost:3000/verify?token=${token}&userId=${newUser._id}`;
-
-    await transport.sendMail({
-      from: "ay@gmail.com",
-      to: user.email,
-      subject: "Forgot Your Password",
-      html: `<h1> Forgot Password Link link <a href="${forgotUrl}">Click Me</a> </h1>`,
+    await sendEmail({
+      profile: { name: user.name, email: user.email },
+      subject: "forgot-password",
+      linkUrl: forgotUrl,
     });
 
     return NextResponse.json({ message: "Please Check Your Mail" });

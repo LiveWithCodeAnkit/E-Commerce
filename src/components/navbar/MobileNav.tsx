@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
   Drawer,
   Typography,
@@ -9,7 +10,6 @@ import {
 } from "@material-tailwind/react";
 import { XMarkIcon, RectangleGroupIcon } from "@heroicons/react/24/outline";
 import { PowerIcon } from "@heroicons/react/24/solid";
-import Link from "next/link";
 import { useAuth } from "./hook";
 import { MenuItems } from "../types";
 import SignOutButton from "../signout/SignOutButton";

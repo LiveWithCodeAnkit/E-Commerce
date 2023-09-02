@@ -1,3 +1,5 @@
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { signUpSchema } from "../schema";
 import { useToastMessages } from "@/components/message/useToastMessages";
 
@@ -7,25 +9,29 @@ interface Props {
   password: string;
 }
 const useSignUp = () => {
+  const router = useRouter();
   const { Success, Warn } = useToastMessages();
   const initialValues: Props = {
     name: "",
     email: "",
     password: "",
   };
-  
 
   const handleSubmit = async (values: Props, { resetForm }: any) => {
-    await fetch("/api/users", {
+    const { name, email, password } = values;
+    const res = await fetch("/api/users", {
       method: "POST",
       body: JSON.stringify(values),
-    }).then(async (res) => {
-      if (res.ok) {
-        const result = await res.json();
-        const { error, message } = result as { message: string; error: string };
-        Success(message);
-      }
     });
+    const { message, error } = await res.json();
+    if (res.ok) {
+      Success(message);
+      // router.replace("/auth/signin");
+     await signIn("credentials", { email, password });
+    }
+    if (!res.ok || error) {
+      Warn(error);
+    }
     resetForm();
   };
 

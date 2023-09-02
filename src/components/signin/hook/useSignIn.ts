@@ -17,14 +17,12 @@ export const useSignIn = () => {
   };
 
   const handleSubmit = async (values: Props, { resetForm }: any) => {
-    console.log("I am login", values);
     const { email, password } = values;
 
     const signRes = await signIn("credentials", {
       ...values,
       redirect: false,
     });
-    console.log("i am login:=", signRes?.error);
 
     if (signRes?.error === "CallbackRouteError") {
       Warn("Something Wrong");

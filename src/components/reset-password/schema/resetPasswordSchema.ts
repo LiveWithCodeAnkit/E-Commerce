@@ -1,5 +1,4 @@
 import * as Yup from "yup";
-
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 const resetPasswordSchema = Yup.object().shape({
   password: Yup.string()

@@ -10,8 +10,6 @@ const SignOutButton = ({ children }: Props) => {
     <>
       <div
         onClick={async () => {
-          console.log(" i am call Logout");
-
           await signOut();
         }}
       >

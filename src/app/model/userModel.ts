@@ -28,20 +28,6 @@ const userSchema = new Schema<UserDocument, {}, Method>(
   { timestamps: true }
 );
 
-// userSchema.pre("save", async function (next) {
-//   try {
-//     if (!this.isModified(this.password)) {
-//       console.log("i am bcrypt");
-//       return next();
-//     }
-//     const salt = await bcrypt.genSalt(10);
-//     this.password = await bcrypt.hash(this.password, salt);
-//     next();
-//   } catch (error) {
-//     throw error;
-//   }
-// });
-
 userSchema.pre("save", async function (next) {
   try {
     if (!this.isModified("password")) {

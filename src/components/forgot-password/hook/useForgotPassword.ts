@@ -1,7 +1,5 @@
-import React from "react";
 import forgotPasswordSchema from "../schema/forgotPasswordSchema";
 import { useToastMessages } from "@/components/message/useToastMessages";
-
 
 interface Props {
   email: string;

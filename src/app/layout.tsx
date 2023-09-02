@@ -3,7 +3,6 @@ import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 import { Inter } from "next/font/google";
-import Navbar from "@/components/navbar";
 import AuthSession from "@/components/auth-session/AuthSession";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +21,6 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <ToastContainer />
-          <Navbar />
 
           {children}
         </body>

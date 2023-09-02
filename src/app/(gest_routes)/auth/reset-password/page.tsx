@@ -11,22 +11,6 @@ interface Props {
   };
 }
 
-
-// const fetchTokenValidation = async (token: string, userId: string) => {
-//   await startDb();
-//   const resetToken = PasswordResetTokenModel.findOne({ user: userId });
-
-//   if (!resetToken) {
-//     return null;
-//   }
-//   const matched = await resetToken.compareToken(token);
-//   if (!matched) {
-//     return null;
-//   }
-//   return true;
-// };
-
-
 const fetchTokenValidation = async (token: string, userId: string) => {
   await startDb();
   const resetToken = await PasswordResetTokenModel.findOne({ user: userId });
@@ -55,7 +39,7 @@ const page = async ({ searchParams }: Props) => {
   }
   return (
     <>
-      <ResetPassword token={token} userId={userId}/>
+      <ResetPassword token={token} userId={userId} />
     </>
   );
 };

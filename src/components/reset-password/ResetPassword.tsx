@@ -7,7 +7,6 @@ interface Props {
   userId: string;
   token: string;
 }
-//{ token, userId }: Props
 export default function ResetPassword({ token, userId }: Props) {
   const { initialValues, schema, submit } = useResetPassword();
   return (

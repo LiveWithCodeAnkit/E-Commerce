@@ -1,7 +1,13 @@
-import { SignInCredentials } from "@/components/types";
 import NextAuth, { NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { SessionUserProfile } from "./src/components/types/index";
+import { SignInCredentials } from "@/components/types";
 
+declare module "next-auth" {
+  interface Session {
+    user: SessionUserProfile;
+  }
+}
 const authConfig: NextAuthConfig = {
   providers: [
     CredentialsProvider({
@@ -16,14 +22,12 @@ const authConfig: NextAuthConfig = {
             method: "POST",
             body: JSON.stringify({ email, password }),
           }
-        ).then(async (res) => {
-          return await res.json();
-        });
+        ).then(async (res) => await res.json());
 
         if (error) {
-          throw new Error(error);
+          return null;
         }
-        return { id: user.id };
+        return { id: user.id, ...user };
       },
     }),
   ],
@@ -31,41 +35,30 @@ const authConfig: NextAuthConfig = {
   callbacks: {
     async jwt(params) {
       if (params.user) {
-        params.token.user = params.user;
+        // params.token.user = params.user;
+
+        params.token = { ...params.token, ...params.user };
       }
       return params.token;
     },
     async session(params) {
-      const user = params.token.user;
+      const user = params.token as typeof params.token & SessionUserProfile;
+
       if (user) {
-        params.session.user = { ...params.session.user, ...user };
+        params.session.user = {
+          ...params.session.user,
+          id: user.id,
+          name: user.name,
+          avatar: user.avatar,
+          role: user.role,
+          verified: user.verified,
+        };
       }
       return params.session;
     },
   },
 };
 
-// const authConfig: NextAuthConfig = {
-//   providers: [
-//     CredentialsProvider({
-//       name: "credentials",
-//       credentials: {},
-//       async authorize(credentials, request) {
-//         const { email, password } = credentials as SignInCredentials;
-//         const response = await fetch("http://localhost:3000/api/users/signin", {
-//           method: "POST",
-//           body: JSON.stringify({ email, password }),
-//         });
-//         const data = await response.json();
-//         if (!response.ok) {
-//           // throw new Error(data.error || "Authentication failed");
-//           return null;
-//         }
-//         return { id: data.user.id };
-//       },
-//     }),
-//   ],
-// };
 export const {
   auth,
   handlers: { GET, POST },

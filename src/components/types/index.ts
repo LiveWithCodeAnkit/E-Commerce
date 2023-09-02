@@ -29,3 +29,12 @@ export interface UpdatePasswordRequest {
   userId: string;
   password: string;
 }
+
+export interface SessionUserProfile {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+  role: "user" | "admin";
+  verified: boolean;
+}

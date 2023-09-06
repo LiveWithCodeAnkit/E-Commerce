@@ -38,3 +38,14 @@ export interface SessionUserProfile {
   role: "user" | "admin";
   verified: boolean;
 }
+
+export interface NewProductInfo {
+  tilte?: string;
+  description: string;
+  mrp: number;
+  salePrice: number;
+  category: string;
+  quantity: number;
+  thumbnail?: File;
+  images: File[];
+}

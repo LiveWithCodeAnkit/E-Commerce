@@ -30,6 +30,9 @@ const useSignUp = () => {
      await signIn("credentials", { email, password });
     }
     if (!res.ok || error) {
+
+      console.log("i am error");
+      
       Warn(error);
     }
     resetForm();

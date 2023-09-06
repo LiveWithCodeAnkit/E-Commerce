@@ -1,11 +1,12 @@
-import React from 'react'
+import ProductTable from "@/components/products/ProductTable";
+import React from "react";
 
 const page = () => {
   return (
-    <div>
-        <h1>i am admin</h1>
-    </div>
-  )
-}
+    <>
+      <ProductTable data={"sdfsd"} />
+    </>
+  );
+};
 
-export default page
+export default page;

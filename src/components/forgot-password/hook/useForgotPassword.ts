@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import forgotPasswordSchema from "../schema/forgotPasswordSchema";
 import { useToastMessages } from "@/components/message/useToastMessages";
 
@@ -6,6 +7,7 @@ interface Props {
 }
 export const useForgotPassword = () => {
   const { Success, Warn } = useToastMessages();
+  const router = useRouter();
   const initialValues: Props = {
     email: "",
   };
@@ -19,6 +21,7 @@ export const useForgotPassword = () => {
     const { message, error } = await res.json();
     if (res.ok) {
       Success(message);
+     
     }
     if (!res.ok || error) {
       Warn(error);

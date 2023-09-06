@@ -111,8 +111,8 @@ export default function ProductTable(props: any) {
               ))}
             </tr>
           </thead>
-          {/* <tbody>
-            {products.map((item, index) => {
+          <tbody>
+            {products.map((item: any, index: any) => {
               const { id, thumbnail, title, price, quantity, category } = item;
               const isLast = index === products.length - 1;
               const classes = isLast
@@ -182,7 +182,7 @@ export default function ProductTable(props: any) {
                 </tr>
               );
             })}
-          </tbody> */}
+          </tbody>
         </table>
       </CardBody>
       {showPageNavigator ? (

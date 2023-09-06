@@ -1,5 +1,7 @@
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
+
+
 import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 import { Inter } from "next/font/google";

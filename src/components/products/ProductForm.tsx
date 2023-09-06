@@ -20,6 +20,7 @@ import { NewProductInfo } from "../types";
 interface Props {
   initialValue?: InitialValue;
   onSubmit(values: NewProductInfo): void;
+  onImageRemove?(source: string): void;
 }
 
 export interface InitialValue {
@@ -46,9 +47,9 @@ const defaultValue = {
 };
 
 const ProductForm = (props: Props) => {
-  const { onSubmit, initialValue } = props;
+  const { onSubmit, onImageRemove, initialValue } = props;
   const [isPending, startTransition] = useTransition();
-  const [images, setImages] = useState<File[]>([]);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [thumbnail, setThumbnail] = useState<File>();
   const [isForUpdate, setIsForUpdate] = useState(false);
   const [productInfo, setProductInfo] = useState({ ...defaultValue });
@@ -80,9 +81,37 @@ const ProductForm = (props: Props) => {
     setProductInfo({ ...productInfo, bulletPoints: [...oldValues] });
   };
 
+  // const removeImage = async (index: number) => {
+  //   const newImages = images.filter((_, idx) => idx !== index);
+  //   setImages([...newImages]);
+  // };
+
   const removeImage = async (index: number) => {
-    const newImages = images.filter((_, idx) => idx !== index);
-    setImages([...newImages]);
+    if (!productImagesSource) return;
+
+    // if image is from cloud we want to remove it from cloud.
+    const imageToRemove = productImagesSource[index];
+    const cloudSourceUrl = "https://res.cloudinary.com";
+    if (imageToRemove.startsWith(cloudSourceUrl)) {
+      onImageRemove && onImageRemove(imageToRemove);
+    } else {
+      // if this image is from local state we want to update local state
+      const fileIndexDifference =
+        productImagesSource.length - imageFiles.length;
+      const indexToRemove = index - fileIndexDifference;
+      const newImageFiles = imageFiles.filter((_, i) => {
+        if (i !== indexToRemove) return true;
+      });
+
+      setImageFiles([...newImageFiles]);
+    }
+
+    // also we want to update UI
+    const newImagesSource = productImagesSource.filter((_, i) => {
+      if (i !== index) return true;
+    });
+
+    setProductImagesSource([...newImagesSource]);
   };
 
   const getBtnTitle = () => {
@@ -105,7 +134,7 @@ const ProductForm = (props: Props) => {
     if (files) {
       const newImages = Array.from(files).map((item) => item);
       const oldImages = productImagesSource || [];
-      setImages([...images, ...newImages]);
+      setImageFiles([...imageFiles, ...newImages]);
       setProductImagesSource([
         ...oldImages,
         ...newImages.map((file) => URL.createObjectURL(file)),
@@ -133,7 +162,7 @@ const ProductForm = (props: Props) => {
           startTransition(async () => {
             await onSubmit({
               ...productInfo,
-              images,
+              images: imageFiles,
               thumbnail,
             });
           })

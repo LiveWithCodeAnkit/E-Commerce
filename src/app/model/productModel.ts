@@ -1,27 +1,35 @@
 import { Document, Schema, models, model, Model } from "mongoose";
 import { categories } from "@/components/constants/categories";
 
-interface ProductDocument extends Document {
+
+
+export interface NewProduct {
   title: string;
   description: string;
-  bulletpoints?: string[];
+  bulletPoints?: string[];
   thumbnail: { url: string; id: string };
   images?: { url: string; id: string }[];
   price: {
     base: number;
     discounted: number;
   };
-
   category: string;
+  quantity: number;
+  rating?: number;
+}
 
+// Step 1: Define the interface for the document
+export interface ProductDocument extends NewProduct {
+  // Virtual property
   sale: number;
 }
 
+// Step 2: Define the Mongoose schema
 const productSchema = new Schema<ProductDocument>(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
-    bulletpoints: { type: [String] },
+    bulletPoints: { type: [String] },
     thumbnail: {
       type: Object,
       required: true,
@@ -39,18 +47,25 @@ const productSchema = new Schema<ProductDocument>(
       discounted: { type: Number, required: true },
     },
     category: { type: String, enum: [...categories], required: true },
+    quantity: { type: Number, required: true },
+    rating: Number,
   },
   { timestamps: true }
 );
 
+// Step 3: Define the virtual property for "sale"
 productSchema.virtual("sale").get(function (this: ProductDocument) {
-  return (this.price.base - this.price.discounted) / this.price.base;
+  return Math.round(
+    ((this.price.base - this.price.discounted) / this.price.base) * 100
+  );
 });
 
+// Step 4: Check if the model already exists before exporting
 const ProductModel =
   models.Product || model<ProductDocument>("Product", productSchema);
 
 export default ProductModel as Model<ProductDocument>;
+
 /*
 this is the interface for mongoose model that i want
 to create 

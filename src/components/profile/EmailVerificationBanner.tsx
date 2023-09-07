@@ -3,7 +3,12 @@ import React, { useState } from "react";
 import { useAuth } from "../navbar/hook";
 import { useToastMessages } from "../message/useToastMessages";
 
-const EmailVerificationBanner = () => {
+interface Props {
+  id?: string;
+  verified?: boolean;
+}
+
+const EmailVerificationBanner = ({ id, verified }: Props) => {
   const { profile } = useAuth();
 
   const [submitting, setSubmitting] = useState(false);

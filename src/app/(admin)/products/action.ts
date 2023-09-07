@@ -36,7 +36,7 @@ export const createProduct = async (info: NewProduct) => {
     await startDb();
     await ProductModel.create({ ...info });
   } catch (error) {
-    console.log((error as any).message);
+    // console.log((error as any).message);
     throw new Error("Something went wrong, can not create product!");
   }
 };
@@ -84,7 +84,7 @@ export const updateProduct = async (
       $push: { images },
     });
   } catch (error) {
-    console.log("Error while updating product, ", (error as any).message);
+    // console.log("Error while updating product, ", (error as any).message);
     throw error;
   }
 };

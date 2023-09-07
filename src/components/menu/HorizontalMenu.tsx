@@ -2,6 +2,7 @@
 import React, { ReactNode, useContext } from "react";
 //@ts-ignore
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
+
 import "react-horizontal-scrolling-menu/dist/styles.css";
 
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
@@ -23,7 +24,7 @@ export function LeftArrow() {
 }
 
 export function RightArrow() {
-    //@ts-ignore
+  //@ts-ignore
   const { isLastItemVisible, scrollNext } = useContext(VisibilityContext);
 
   return (

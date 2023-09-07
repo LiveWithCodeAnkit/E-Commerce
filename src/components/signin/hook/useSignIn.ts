@@ -23,9 +23,9 @@ export const useSignIn = () => {
       ...values,
       redirect: false,
     });
-    console.log(signRes);
+   
     if (signRes?.error === "CredentialsSignin") {
-      console.log(signRes);
+  
 
       Warn("Something Wrong");
       router.refresh();

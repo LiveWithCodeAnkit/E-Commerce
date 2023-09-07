@@ -14,7 +14,7 @@ export default async function PerivateLayout({ children }: Props) {
   return (
     <div className="max-w-screen-xl mx-auto p-4 ">
       <Navbar />
-      <EmailVerificationBanner />
+      {/* <EmailVerificationBanner /> */}
       {children}
     </div>
   );

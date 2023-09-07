@@ -11,7 +11,6 @@ const useAuth = (): Auth => {
   const session = useSession();
   const user = session.data?.user;
 
-  // console.log("fgjdfjg:=",user);
   
   return {
     loading: session.status === "loading",

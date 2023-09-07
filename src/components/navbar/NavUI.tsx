@@ -11,6 +11,7 @@ import {
   XMarkIcon,
   UserCircleIcon,
   ShoppingBagIcon,
+  HeartIcon,
 } from "@heroicons/react/24/outline";
 import ProfileMenu from "./ProfileMenu";
 import CartIcon from "./CartIcon";
@@ -19,6 +20,7 @@ import { useAuth } from "./hook";
 
 interface Props {
   cartItemsCount: number;
+  avatar?: string;
 }
 
 export const menuItems = [
@@ -32,9 +34,14 @@ export const menuItems = [
     icon: <ShoppingBagIcon className="h-4 w-4" />,
     label: "Orders",
   },
+  {
+    href: "/profile/wishlist",
+    icon: <HeartIcon className="h-4 w-4" />,
+    label: "Wishlist",
+  },
 ];
 
-export default function NavUI({ cartItemsCount }: Props) {
+export default function NavUI({ cartItemsCount, avatar }: Props) {
   const [open, setOpen] = React.useState(false);
   const { loading, loggedIn } = useAuth();
 

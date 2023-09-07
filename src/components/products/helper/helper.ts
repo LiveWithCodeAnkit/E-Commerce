@@ -4,7 +4,7 @@ import {
 } from "@/app/(admin)/products/action";
 
 export const uploadImage = async (file: File) => {
-  console.log("i am call helper");
+
 
   const cloudConfig = await getCloudConfig();
 
@@ -24,7 +24,7 @@ export const uploadImage = async (file: File) => {
   });
 
   const data = await res.json();
-  // console.log(data);
+
 
   return { url: data.secure_url, id: data.public_id };
 };

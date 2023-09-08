@@ -1,11 +1,8 @@
 "use client";
-
-import { Avatar, Option, Select } from "@material-tailwind/react";
-import Image from "next/image";
 import React, { useTransition } from "react";
-import { formatPrice } from "./helper/helper";  
-
-
+import Image from "next/image";
+import { Avatar, Option, Select } from "@material-tailwind/react";
+import { formatPrice } from "./helper/helper";
 
 type product = {
   id: string;

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import ProfileAvatarInput from "./ProfileAvatarInput";
 import { uploadImage } from "../products/helper/helper";
 import { updateUserProfile } from "@/app/(private_route)/profile/action";
+import { useToastMessages } from "../message/useToastMessages";
 
 interface Props {
   avatar?: string;
@@ -20,12 +21,16 @@ export default function ProfileForm({ id, name, avatar, email }: Props) {
   const [avatarFile, setAvatarFile] = useState<File>();
   const [userName, setUserName] = useState(name);
   const router = useRouter();
-
+  const { Success, Warn } = useToastMessages();
   const avatarSource = avatarFile ? URL.createObjectURL(avatarFile) : avatar;
   const showSubmitButton = avatarSource !== avatar || userName !== name;
 
   const updateUserInfo = async () => {
-    if (userName.trim().length < 3) return toast.error("Name is invalid!");
+    if (userName.trim().length < 3) {
+      //  return toast.error("Name is invalid!");
+
+      return Warn("Name is invalid!");
+    }
 
     const info: UserProfileToUpdate = { id, name: userName };
 

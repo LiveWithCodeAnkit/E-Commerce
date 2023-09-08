@@ -1,5 +1,4 @@
 "use server";
-
 import startDb from "@/app/lib/db";
 import {
   FeaturedProductForUpdate,

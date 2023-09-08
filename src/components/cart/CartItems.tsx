@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { Button } from "@material-tailwind/react";
 import CartCountUpdater from "./CartCountUpdater";
 import { formatPrice } from "../order/helper/helper";
+import { useToastMessages } from "../message/useToastMessages";
 
 export interface Product {
   id: string;
@@ -33,6 +34,8 @@ const CartItems: React.FC<CartItemsProps> = ({
   const [busy, setBusy] = useState(false);
   const router = useRouter();
 
+  const { Success, Warn } = useToastMessages();
+
   const handleCheckout = async () => {
     setBusy(true);
     const res = await fetch("/api/checkout", {
@@ -43,7 +46,8 @@ const CartItems: React.FC<CartItemsProps> = ({
     const { error, url } = await res.json();
 
     if (!res.ok) {
-      toast.error(error);
+      // toast.error(error);
+      Warn(error);
     } else {
       // open the checkout url
       window.location.href = url;

@@ -1,3 +1,10 @@
+import { useState } from "react";
+import Link from "next/link";
+import {
+  ChevronDownIcon,
+  PowerIcon,
+  RectangleGroupIcon,
+} from "@heroicons/react/24/outline";
 import {
   Avatar,
   Button,
@@ -6,16 +13,9 @@ import {
   MenuItem,
   MenuList,
 } from "@material-tailwind/react";
-import {
-  ChevronDownIcon,
-  PowerIcon,
-  RectangleGroupIcon,
-} from "@heroicons/react/24/outline";
-import { useState } from "react";
-import Link from "next/link";
+import SignOutButton from "../signout/SignOutButton";
 import { useAuth } from "../navbar/hook";
 import { MenuItems } from "../types";
-import SignOutButton from "../signout/SignOutButton";
 
 interface Props {
   menuItems: MenuItems[];

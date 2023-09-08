@@ -3,7 +3,6 @@ import Image from "next/image";
 import dateFormat from "dateformat";
 import ReviewStars from "./ReviewStars";
 
-
 interface Review {
   id: string;
   rating: number;

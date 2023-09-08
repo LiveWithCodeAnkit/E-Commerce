@@ -5,6 +5,7 @@ import React, {
   useTransition,
   ChangeEventHandler,
 } from "react";
+import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import {
   Button,
   Input,
@@ -12,7 +13,6 @@ import {
   Select,
   Textarea,
 } from "@material-tailwind/react";
-import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import ImageSelector from "../image-ui/ImageSelector";
 import { categories } from "../constants/categories";
 import { NewProductInfo } from "../types";

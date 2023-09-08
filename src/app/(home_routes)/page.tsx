@@ -61,7 +61,9 @@ export default async function Home() {
   const featuredProducts = await fetchFeaturedProducts();
 
   return (
-    <div className="py-4 space-y-4">
+    // <div className="py-4 space-y-4">
+    <div className="max-w-screen-xl mx-auto p-4 space-y-10 py-8">
+      {/* <div className="flex flex-col justify-center gap-10 w-auto  "> */}
       <FeaturedProductsSlider products={featuredProducts} />
       <CategoryMenu />
       <GridView>

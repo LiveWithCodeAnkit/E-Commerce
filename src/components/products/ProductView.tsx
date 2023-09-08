@@ -1,9 +1,8 @@
 import React from "react";
 import BuyingOptions from "./BuyingOptions";
-import { formatPrice } from "../order/helper/helper";
 import ProductImageGallery from "./ProductImageGallery";
 import Rating from "../rating/Rating";
-
+import { formatPrice } from "../order/helper/helper";
 
 
 interface Props {

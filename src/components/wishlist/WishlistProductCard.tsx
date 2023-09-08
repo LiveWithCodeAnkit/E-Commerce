@@ -1,12 +1,13 @@
 "use client";
-import Image from "next/image";
 import React, { useTransition } from "react";
-import { Button } from "@material-tailwind/react";
+import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@material-tailwind/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "../order/helper/helper";
 import Wishlist from "../image-ui/Wishlist";
+import { useToastMessages } from "../message/useToastMessages";
 
 interface Props {
   product: {
@@ -20,7 +21,7 @@ interface Props {
 export default function WishlistProductCard({ product }: Props) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-
+  const { Success, Warn } = useToastMessages();
   const { id, price, thumbnail, title } = product;
 
   const updateWishlist = async () => {
@@ -32,7 +33,10 @@ export default function WishlistProductCard({ product }: Props) {
     });
 
     const { error } = await res.json();
-    if (!res.ok && error) toast.error(error);
+    if (!res.ok && error) {
+      // toast.error(error);
+      Warn(error);
+    }
 
     router.refresh();
   };

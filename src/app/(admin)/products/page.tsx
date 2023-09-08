@@ -63,12 +63,4 @@ export default async function Products({ searchParams }: Props) {
     </div>
   );
 }
-// const page = () => {
-//   return (
-//     <>
-//       <ProductTable data={"sdfsd"} />
-//     </>
-//   );
-// };
 
-// export default page;

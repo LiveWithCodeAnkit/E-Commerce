@@ -1,7 +1,6 @@
-import { auth } from "../../../auth";
+import { Types } from "mongoose";
 import startDb from "./db";
 import CartModel from "../model/cartModel";
-import { Types } from "mongoose";
 import { CartItems } from "@/components/types";
 
 export const getCartItems = async (

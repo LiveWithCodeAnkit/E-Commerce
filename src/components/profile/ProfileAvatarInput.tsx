@@ -1,5 +1,5 @@
-import { Avatar } from "@material-tailwind/react";
 import { PencilIcon } from "@heroicons/react/24/solid";
+import { Avatar } from "@material-tailwind/react";
 
 interface ProfileAvatarProps {
   avatar?: string;

@@ -1,6 +1,6 @@
 "use client";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import React from "react";
 import {
   Navbar as MaterialNav,
   IconButton,
@@ -17,6 +17,7 @@ import ProfileMenu from "./ProfileMenu";
 import CartIcon from "./CartIcon";
 import { MobileNav } from "./MobileNav";
 import { useAuth } from "./hook";
+import SearchForm from "../search-form/SearchForm";
 
 interface Props {
   cartItemsCount: number;
@@ -42,10 +43,10 @@ export const menuItems = [
 ];
 
 export default function NavUI({ cartItemsCount, avatar }: Props) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const { loading, loggedIn } = useAuth();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const onResize = () => window.innerWidth >= 960 && setOpen(false);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -55,17 +56,20 @@ export default function NavUI({ cartItemsCount, avatar }: Props) {
     <>
       <MaterialNav className="mx-auto max-w-screen-xl px-4 py-2">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Link
-            href="/"
-            className="mr-4 cursor-pointer py-1.5 lg:ml-2 font-semibold"
-          >
-            live_ankit
+          <Link href="/" className="cursor-pointer font-semibold">
+            LiveAnkit
           </Link>
+
+          <div className="flex-1 flex justify-center">
+            <div className="md:w-96 w-full md:mx-0 mx-4 ">
+              <SearchForm submitTo="/search?query=" />
+            </div>
+          </div>
 
           <div className="hidden lg:flex gap-2 items-center">
             <CartIcon cartItems={cartItemsCount} />
             {loggedIn ? (
-              <ProfileMenu menuItems={menuItems} />
+              <ProfileMenu menuItems={menuItems} avatar={avatar} />
             ) : loading ? (
               <Spinner />
             ) : (

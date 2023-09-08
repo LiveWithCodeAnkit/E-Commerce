@@ -17,7 +17,8 @@ import { useTransition } from "react";
 import Rating from "../rating/Rating";
 import { formatPrice } from "../order/helper/helper";
 import { useAuth } from "../navbar/hook";
-useAuth;
+import { useToastMessages } from "../message/useToastMessages";
+
 export interface Product {
   id: string;
   title: string;
@@ -39,6 +40,7 @@ interface Props {
 export default function ProductCard({ product }: Props) {
   const { loggedIn } = useAuth();
   const router = useRouter();
+  const { Success, Warn } = useToastMessages();
   const [isPending, startTransition] = useTransition();
 
   const handleCheckout = async () => {
@@ -50,7 +52,8 @@ export default function ProductCard({ product }: Props) {
     const { error, url } = await res.json();
 
     if (!res.ok) {
-      toast.error(error);
+      // toast.error(error);
+      Warn(error);
     } else {
       // open the checkout url
       window.location.href = url;
@@ -66,7 +69,11 @@ export default function ProductCard({ product }: Props) {
     });
 
     const { error } = await res.json();
-    if (!res.ok && error) toast.error(error);
+    if (!res.ok && error) {
+      // toast.error(error);
+
+      Warn(error);
+    }
     router.refresh();
   };
 

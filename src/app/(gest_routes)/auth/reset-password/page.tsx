@@ -1,9 +1,9 @@
+import React from "react";
+import { notFound } from "next/navigation";
 import startDb from "@/app/lib/db";
 import PasswordResetTokenModel from "@/app/model/passwordResetTokenModel";
 import ResetPassword from "@/components/reset-password/ResetPassword";
-import { notFound } from "next/navigation";
 
-import React from "react";
 interface Props {
   searchParams: {
     token: string;

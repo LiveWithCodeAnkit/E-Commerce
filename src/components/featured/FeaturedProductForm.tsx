@@ -1,24 +1,24 @@
 "use client";
-import { Button, Input } from "@material-tailwind/react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+
+import * as Yup from "yup";
 import React, {
   ChangeEventHandler,
   useEffect,
   useState,
   useTransition,
 } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import * as Yup from "yup";
+import { Button, Input } from "@material-tailwind/react";
 import { extractPublicId, uploadImage } from "../products/helper/helper";
-
 import { FeaturedProductForUpdate } from "../types";
-
 import {
   createFeaturedProduct,
   updateFeaturedProduct,
 } from "@/app/(admin)/products/featured/action";
 import { removeImageFromCloud } from "@/app/(admin)/products/action";
+import { useToastMessages } from "../message/useToastMessages";
 
 export interface FeaturedProduct {
   file?: File;
@@ -81,7 +81,7 @@ export default function FeaturedProductForm({ initialValue }: Props) {
   const [featuredProduct, setFeaturedProduct] =
     useState<FeaturedProduct>(defaultProduct);
   const router = useRouter();
-
+  const { Success, Warn } = useToastMessages();
   const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { name, value, files } = target;
 
@@ -118,7 +118,9 @@ export default function FeaturedProductForm({ initialValue }: Props) {
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         error.inner.map((err) => {
-          toast.error(err.message);
+          // toast.error(err.message);
+
+          Warn(err.message);
         });
       }
     }
@@ -139,7 +141,9 @@ export default function FeaturedProductForm({ initialValue }: Props) {
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         error.inner.map((err) => {
-          toast.error(err.message);
+          // toast.error(err.message);
+
+          Warn(err.message);
         });
       }
     }
@@ -188,14 +192,28 @@ export default function FeaturedProductForm({ initialValue }: Props) {
           )}
         </div>
       </label>
-      <Input label="Title" name="title" value={title} onChange={handleChange} crossOrigin={undefined} />
+      <Input
+        label="Title"
+        name="title"
+        value={title}
+        onChange={handleChange}
+        crossOrigin={undefined}
+      />
       <div className="flex space-x-4">
-        <Input label="Link" name="link" value={link} onChange={handleChange} crossOrigin={undefined} />
+        <Input
+          label="Link"
+          name="link"
+          value={link}
+          onChange={handleChange}
+          crossOrigin={undefined}
+        />
         <Input
           label="Lik Title"
           name="linkTitle"
           value={linkTitle}
-          onChange={handleChange} crossOrigin={undefined}        />
+          onChange={handleChange}
+          crossOrigin={undefined}
+        />
       </div>
       <div className="text-right">
         <Button disabled={isPending} type="submit">

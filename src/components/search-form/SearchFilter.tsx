@@ -1,10 +1,10 @@
 "use client";
-import { Radio } from "@material-tailwind/react";
 import React, { ReactNode, useState } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import { StarIcon } from "@heroicons/react/24/solid";
 import { useRouter, useSearchParams } from "next/navigation";
+import { StarIcon } from "@heroicons/react/24/solid";
+import { Radio } from "@material-tailwind/react";
 
 interface Props {
   children: ReactNode;
@@ -51,7 +51,9 @@ export default function SearchFilter({ children }: Props) {
                 defaultChecked={lowToHeight}
                 color="blue-gray"
                 className="text-sm"
-                onChange={() => setPriceFilter("asc")} crossOrigin={undefined}              />
+                onChange={() => setPriceFilter("asc")}
+                crossOrigin={undefined}
+              />
             </div>
             <div>
               <Radio
@@ -59,7 +61,9 @@ export default function SearchFilter({ children }: Props) {
                 label="Heigh to low"
                 color="blue-gray"
                 onChange={() => setPriceFilter("desc")}
-                defaultChecked={heightToLow} crossOrigin={undefined}              />
+                defaultChecked={heightToLow}
+                crossOrigin={undefined}
+              />
             </div>
           </div>
         </div>

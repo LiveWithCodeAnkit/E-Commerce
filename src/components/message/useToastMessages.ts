@@ -10,7 +10,7 @@ export const useToastMessages = () => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "light",
+      theme: "colored",
     });
 
   const notifyInfo = (message: any) =>
@@ -34,7 +34,7 @@ export const useToastMessages = () => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "light",
+      theme: "colored",
     });
   return {
     Success: notifySuccess,

@@ -1,9 +1,5 @@
 import React from "react";
-
-// import HorizontalMenu from "./HorizontalMenu";
 import Image from "next/image";
-// import { formatPrice } from "@utils/helper";
-
 import Link from "next/link";
 import HorizontalMenu from "../menu/HorizontalMenu";
 import { formatPrice } from "../order/helper/helper";

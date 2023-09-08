@@ -1,8 +1,8 @@
 "use client";
-import { Rating } from "@material-tailwind/react";
+import React from "react";
 import { StarIcon as RatedIcon } from "@heroicons/react/24/solid";
 import { StarIcon as UnratedIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import { Rating } from "@material-tailwind/react";
 
 interface Props {
   rating: number;

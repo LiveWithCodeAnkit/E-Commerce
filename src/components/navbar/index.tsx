@@ -1,11 +1,10 @@
 import React from "react";
-import NavUI from "./NavUI";
-import { auth } from "../../../auth";
-import CartModel from "@/app/model/cartModel";
 import { Types } from "mongoose";
-import { redirect } from "next/navigation";
+import NavUI from "./NavUI";
+import CartModel from "@/app/model/cartModel";
 import startDb from "@/app/lib/db";
 import UserModel from "@/app/model/userModel";
+import { auth } from "../../../auth";
 
 const fetchUserProfile = async () => {
   const session = await auth();
@@ -46,12 +45,12 @@ const getCartItemsCount = async () => {
       return 0;
     }
   } catch (error) {
-    console.log("Error while fetching cart items count: ", error);
+    // console.log("Error while fetching cart items count: ", error);
     return 0;
   }
 };
 
-const Navbar = async() => {
+const Navbar = async () => {
   const cartItemsCount = await getCartItemsCount();
   const profile = await fetchUserProfile();
 

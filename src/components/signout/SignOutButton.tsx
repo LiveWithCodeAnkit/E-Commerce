@@ -18,5 +18,4 @@ const SignOutButton = ({ children }: Props) => {
     </>
   );
 };
-
 export default SignOutButton;

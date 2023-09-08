@@ -21,7 +21,6 @@ const settings: Settings = {
   className: "w-[500px]",
 };
 
-// Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
 const keyStr =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 

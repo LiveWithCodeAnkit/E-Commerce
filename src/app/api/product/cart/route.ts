@@ -1,6 +1,6 @@
+import startDb from "@/app/lib/db";
 import { isValidObjectId } from "mongoose";
 import { NextResponse } from "next/server";
-import startDb from "@/app/lib/db";
 import CartModel from "@/app/model/cartModel";
 import { NewCartRequest } from "@/components/types";
 import { auth } from "../../../../../auth";

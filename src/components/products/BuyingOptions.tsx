@@ -10,7 +10,6 @@ import Wishlist from "../image-ui/Wishlist";
 interface Props {
   wishlist?: boolean;
 }
-
 export default function BuyingOptions({ wishlist }: Props) {
   const [quantity, setQuantity] = useState(1);
   const [isPending, startTransition] = useTransition();

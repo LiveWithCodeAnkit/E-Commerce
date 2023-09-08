@@ -1,9 +1,9 @@
+import { Types, isValidObjectId } from "mongoose";
 import startDb from "@/app/lib/db";
 import ProductModel from "@/app/model/productModel";
 import ReviewModel from "@/app/model/reviewModel";
 import { ReviewRequestBody } from "@/components/types";
 import { auth } from "../../../../../auth";
-import { Types, isValidObjectId } from "mongoose";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {

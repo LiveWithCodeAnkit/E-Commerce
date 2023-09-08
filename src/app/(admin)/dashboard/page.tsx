@@ -1,16 +1,14 @@
-import { ObjectId } from "mongoose";
 import React from "react";
-import RecentOrdersList, {
-  RecentOrders,
-} from "@/components/order/RecentOrdersList";
-
-import RecentReviewsList, {
-  RecentReviews,
-} from "@/components/review/RecentReviewsList";
-
+import { ObjectId } from "mongoose";
 import startDb from "@/app/lib/db";
 import OrderModel from "@/app/model/orderModel";
 import ReviewModel from "@/app/model/reviewModel";
+import RecentOrdersList, {
+  RecentOrders,
+} from "@/components/order/RecentOrdersList";
+import RecentReviewsList, {
+  RecentReviews,
+} from "@/components/review/RecentReviewsList";
 
 const fetchRecentOrders = async () => {
   await startDb();

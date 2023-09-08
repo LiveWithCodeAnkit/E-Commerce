@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 import { isValidObjectId } from "mongoose";
 import startDb from "@/app/lib/db";
 import ProductModel from "@/app/model/productModel";
-import { ProductResponse } from "@/components/types";
 import UpdateProduct from "@/components/products/UpdateProduct";
+import { ProductResponse } from "@/components/types";
 
 interface Props {
   params: {

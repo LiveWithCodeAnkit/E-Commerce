@@ -1,15 +1,11 @@
 "use client";
 import React from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Button } from "@material-tailwind/react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-
-
-
-
 
 export interface FeaturedProduct {
   id: string;
@@ -31,9 +27,42 @@ const settings: Settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   arrows: true,
+  // nextArrow: <SampleNextArrow />,
+  // prevArrow: <SamplePrevArrow />,
+
   autoplay: true,
 };
+// function SampleNextArrow(props: any) {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{
+//         ...style,
+//         display: "block",
+//         background: "black",
+//         borderRadius: "11px",
+//       }}
+//       onClick={onClick}
+//     />
+//   );
+// }
 
+// function SamplePrevArrow(props: any) {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{
+//         ...style,
+//         display: "block",
+//         background: "black",
+//         borderRadius: "11px",
+//       }}
+//       onClick={onClick}
+//     />
+//   );
+// }
 export default function FeaturedProductsSlider({ products }: Props) {
   const router = useRouter();
 

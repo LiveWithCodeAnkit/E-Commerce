@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { ErrorMessage, Field, Form, Formik } from "formik";
 import Link from "next/link";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import useSignUp from "./hook/useSignUp";
 
 export default function SignUp() {

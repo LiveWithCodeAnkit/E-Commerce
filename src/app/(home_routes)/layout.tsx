@@ -8,7 +8,7 @@ interface Props {
 
 export default async function HomeLayout({ children }: Props) {
   return (
-    <div>
+    <div className="max-w-screen-xl mx-auto p-4 ">
       <Navbar />
       {children}
     </div>

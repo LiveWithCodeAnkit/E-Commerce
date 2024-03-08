@@ -55,7 +55,7 @@ export default function ForgetPassword() {
   };
 
   return (
-    <FormContainer title="Create New Account" onSubmit={handleSubmit}>
+    <FormContainer title="Forgot Your Password" onSubmit={handleSubmit}>
       <Input
         name="email"
         label="Email"

@@ -6,13 +6,11 @@ import Notification from "@components/Notification";
 import AuthSession from "./components/AuthSession";
 import React from "react";
 import Script from "next/script";
+import { metadata } from "./lib/metadata";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "live_ankit",
-  description: "LiveWithCodeAnkit",
-};
+
 
 const initBotpress = () => {
   window.botpressWebChat.init({
@@ -47,6 +45,18 @@ export default function RootLayout({
     <AuthSession>
       <html lang="en">
         <head>
+        <meta charSet="UTF-8" />
+        <meta charSet="UTF-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+           <meta
+            name="description"
+            content={metadata.description!} 
+          />
+          <title>{metadata.title as React.ReactNode}</title>
+
           <Script
             src="https://cdn.botpress.cloud/webchat/v0/inject.js"
             onLoad={() => {

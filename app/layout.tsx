@@ -15,7 +15,6 @@ export const metadata: Metadata = {
 };
 
 const initBotpress = () => {
-  // @ts-ignore
   window.botpressWebChat.init({
     composerPlaceholder: "Chat with liveAnkit",
     botConversationDescription: "welcome to liveankit.com",
